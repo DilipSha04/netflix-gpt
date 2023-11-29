@@ -1,8 +1,65 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+
+  const [validationMessage, setValidationMessage] = useState(null);
+
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+
+  const handleClickButton = () => {
+    const message = checkValidData(email.current.value, password.current.value);
+    setValidationMessage(message);
+    if (message) return;
+
+    if (!isSignInForm) {
+      //sign Up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setValidationMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      //Sign In Logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setValidationMessage(errorCode + "-" + errorMessage);
+        });
+    }
+  };
 
   const toggelSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -18,30 +75,40 @@ const Login = () => {
         />
       </div>
       <form
+        onSubmit={(e) => e.preventDefault()}
         className="flex  flex-col bg-black bg-opacity-90 absolute w-2/6 left-[35%] top-[15%] px-12 py-2 rounded-sm"
         action=""
       >
         <h1 className="text-white font-semibold text-[26px] my-6">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
-        {!isSignInForm && <input
-          type="text"
-          placeholder="Name"
-          className="px-2 py-3 my-3 bg-[#333] rounded-md outline-none caret-white text-white"
-        />}
+        {!isSignInForm && (
+          <input
+            ref={name}
+            type="text"
+            placeholder="Name"
+            className="px-2 py-3 my-3 bg-[#333] rounded-md outline-none caret-white text-white"
+          />
+        )}
         <input
+          ref={email}
           type="email"
           placeholder="Email"
           className="px-2 py-3 my-3 bg-[#333] rounded-md outline-none caret-white text-white"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           name=""
           id=""
           className="px-2 py-3 my-3 bg-[#333] rounded-md outline-none caret-white text-white"
         />
-        <button className="bg-[#e50914] text-white p-3 my-3 rounded-md">
+        <p className="py-2 px-1  text-orange-500">{validationMessage}</p>
+        <button
+          className="bg-[#e50914] text-white p-3 my-3 rounded-md"
+          onClick={handleClickButton}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <div className="flex justify-between my-4">
@@ -51,7 +118,10 @@ const Login = () => {
           </span>
           <span className="text-slate-400">Need Help ? </span>
         </div>
-        <p className="text-slate-400 mt-2 cursor-pointer" onClick={toggelSignInForm}>
+        <p
+          className="text-slate-400 mt-2 cursor-pointer"
+          onClick={toggelSignInForm}
+        >
           {isSignInForm
             ? "New to Netflix ? Sign Up Now."
             : "Already Ragisterd.. Sign In Now."}

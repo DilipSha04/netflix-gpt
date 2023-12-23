@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <div className="w-full absolute bg-gradient-to-b from-black z-10 flex">
-      <img className="w-[14rem] contrast-125" src={LOGO} alt="Logo" />
+      <img className="w-[14rem] ml-2 contrast-125" src={LOGO} alt="Logo" />
       {user && (
         <div className="absolute right-3 top-6  flex">
           <img

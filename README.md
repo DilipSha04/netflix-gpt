@@ -35,6 +35,10 @@
 -TMDB Iamge CDN URL
 -Made The Browse Page Amazing with tailwind
 -Use Custom Hooks for Movie category
+-GPT search feature
+-GPT Search Page
+-GPT Search Bar
+-Multilangual Search Feature in our app
 
 
 # Feature

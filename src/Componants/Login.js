@@ -10,7 +10,7 @@ import { auth } from "../utils/firebase";
 
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { USER_AVATAR } from "../utils/constants";
+import { BG_URL, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -57,7 +57,6 @@ const Login = () => {
             .catch((error) => {
               setValidationMessage(error.message);
             });
-          console.log(user);
 
           // ...
         })
@@ -95,11 +94,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="bg-gradient-to-b from-black contrast-125">
-        <img
-          className=" bg-center bg-no-repeat"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/d1532433-07b1-4e39-a920-0f08b81a489e/67033404-2df8-42e0-a5a0-4c8288b4da2c/IN-en-20231120-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt=""
-        />
+        <img className=" bg-center bg-no-repeat" src={BG_URL} alt="" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}

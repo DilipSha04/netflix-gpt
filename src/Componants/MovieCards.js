@@ -2,6 +2,7 @@ import React from 'react'
 import { IMG_CDN_URL } from '../utils/constants'
 
 const MovieCards = ({posterPath}) => {
+  if(!posterPath) return null;
   return (
     <div className="w-40 px-2">
       <img className=" transition-all duration-300" src={IMG_CDN_URL + posterPath} alt="Movie Card" />

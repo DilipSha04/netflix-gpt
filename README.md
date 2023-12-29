@@ -39,6 +39,14 @@
 -GPT Search Page
 -GPT Search Bar
 -Multilangual Search Feature in our app
+-Get Gpt open ai api key
+-Gpt search api call
+-Memoization
+-Resued Movie list component to make movie suggestion
+-fetched getMoviesuggestion from tmdb
+-adding .env file
+-adding .env to gitignore
+-Made site responsive
 
 
 # Feature

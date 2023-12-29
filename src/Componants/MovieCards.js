@@ -4,8 +4,8 @@ import { IMG_CDN_URL } from '../utils/constants'
 const MovieCards = ({posterPath}) => {
   if(!posterPath) return null;
   return (
-    <div className="w-40 px-2">
-      <img className=" transition-all duration-300" src={IMG_CDN_URL + posterPath} alt="Movie Card" />
+    <div className="md:w-40 w-20 px-2">
+      <img className="" src={IMG_CDN_URL + posterPath} alt="Movie Card" />
     </div>
   )
 }

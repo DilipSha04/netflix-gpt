@@ -91,17 +91,17 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div>
+    <div className="">
       <Header />
       <div className="bg-gradient-to-b from-black contrast-125">
-        <img className=" bg-center bg-no-repeat" src={BG_URL} alt="" />
+        <img className="h-screen md:w-[100vw] object-cover " src={BG_URL} alt="" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="flex  flex-col bg-black bg-opacity-90 absolute w-2/6 left-[35%] top-[15%] px-12 py-2 rounded-sm"
+        className="flex flex-col bg-black bg-opacity-90 absolute md:w-2/6 w-full md:left-[35%] left-0 md:top-[17%] top-[26%] px-12 rounded-sm z-10"
         action=""
       >
-        <h1 className="text-white font-semibold text-[26px] my-6">
+        <h1 className="text-white font-semibold text-[24px] my-2">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (

@@ -22,8 +22,7 @@ const GptSearchBar = () => {
     return json.results;
   };
 
-  const handleGptearchClick = async () => {
-    console.log(searchText.current.value);
+  const handleGptsearchClick = async () => {
     //Make an API call to get GPT API and get Movie Result
 
     const gptQuery =
@@ -35,7 +34,6 @@ const GptSearchBar = () => {
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
-    console.log(getResult.choices[0]?.message?.content);
     const gptMovieList = getResult.choices[0]?.message?.content.split(",");
 
     // From each movie i will search TMDB API
@@ -43,8 +41,6 @@ const GptSearchBar = () => {
     const promiseArray = gptMovieList.map((movie) => searchMovieTMDB(movie));
     //[promise, promise, promise, promise, promise]
     const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
 
     dispatch(addGptMovieResult({movieNames : gptMovieList, movieResults:tmdbResults}));
   };
@@ -54,19 +50,19 @@ const GptSearchBar = () => {
       <form
         onSubmit={(e) => e.preventDefault()}
         action=""
-        className=" flex justify-center items-center bg-black bg-opacity-80 px-4 py-2 absolute top-[20%] w-full"
+        className=" flex justify-center items-center bg-black bg-opacity-80 px-4 py-2 absolute md:top-[30%] top-[20%] w-full"
       >
         <input
           ref={searchText}
-          className="py-2 px-4 my-2 mx-2 w-6/12 rounded-md outline-none text-slate-800"
+          className="py-2 px-4 my-2 mx-2 md:w-6/12 w-7/12 rounded-md outline-none text-slate-800"
           type="text"
           name=""
           placeholder={lang[langKey].gptSearchPlaceholder}
           id=""
         />
         <button
-          className="bg-[#e50314] w-2/12 text-white rounded-sm px-2 py-2 "
-          onClick={handleGptearchClick}
+          className="bg-[#e50314] md:w-2/12 w-3/12 text-white rounded-sm px-2 py-2 "
+          onClick={handleGptsearchClick}
         >
           {lang[langKey].search}
         </button>

@@ -4,10 +4,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { LOGO, MENU_ICON_URL, SUPPORTED_LANGUAGES } from "../utils/constants";
 import { toggelGptSearchView } from "../utils/gptSlice";
 import lang from "../utils/languageConstant";
 import { changeLanguage } from "../utils/configSlice";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -57,12 +58,19 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
 
+  const handletoggleMenu = () => {
+    addEventListener.className = ""
+  }
+
   return (
-    <div className="w-full absolute bg-gradient-to-b from-black z-10 bg-black md:py-0 py-10 ">
-      <img className="md:w-[14rem] w-[10rem] md:ml-2 ml-3 md:mt-0 contrast-125" src={LOGO} alt="Logo" />
+    <div className="w-full absolute bg-gradient-to-b from-black z-10 bg-black md:py-0 py-2 h-24 ">
+      <img className="md:w-[14rem] w-[10rem] md:ml-2 ml-3 mt-0 contrast-125" src={LOGO} alt="Logo" />
+      
       {user && (
-        <div className="absolute right-3 md:top-6 top-24  mt-2">
-          <div className="flex justify-between">
+        <div className="absolute right-3 md:top-6 top-6 flex">
+          <img className="bg-red-700 w-10 rounded-sm md:hidden inline-block" src={MENU_ICON_URL} onClick={handletoggleMenu} alt="Menu" />
+          
+          <div className="md:flex justify-between hidden">
           {showGptSearch && <select
             className="outline-none bg-[#e50314] px-2  text-white "
             onChange={handleLanguageChange}

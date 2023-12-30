@@ -8,6 +8,7 @@ import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { toggelGptSearchView } from "../utils/gptSlice";
 import lang from "../utils/languageConstant";
 import { changeLanguage } from "../utils/configSlice";
+import Login from "./Login";
 
 const MobileMenu = () => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const MobileMenu = () => {
   };
   if(!isMenuOpen) return null;
   return (
+  <>
     <div className="md:hidden flex relative">
       <div className="flex flex-col justify-center  space-y-4 py-2 fixed w-5/12 h-[50%] right-0 top-0 bg-black bg-opacity-80 text-white ">
         {showGptSearch && (
@@ -91,6 +93,7 @@ const MobileMenu = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

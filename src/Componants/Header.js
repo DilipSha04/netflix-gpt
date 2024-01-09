@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO, MENU_ICON_URL, SUPPORTED_LANGUAGES } from "../utils/constants";
 import { toggelGptSearchView } from "../utils/gptSlice";
-import lang from "../utils/languageConstant";
 import { changeLanguage } from "../utils/configSlice";
 import MobileMenu from "./MobileMenu";
 import { toggleMenu } from "../utils/menuSlice";

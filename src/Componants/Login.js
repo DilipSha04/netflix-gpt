@@ -91,10 +91,14 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div className="">
+    <div className="relative overflow-hidden">
       <Header />
       <div className="bg-gradient-to-b from-black contrast-125">
-        <img className="h-screen md:w-[100vw] object-cover " src={BG_URL} alt="" />
+        <img
+          className="h-screen md:w-[100vw] object-cover "
+          src={BG_URL}
+          alt=""
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -102,7 +106,14 @@ const Login = () => {
         action=""
       >
         <h1 className="text-white font-semibold text-[24px] my-2">
-          {isSignInForm ? "Sign In" : "Sign Up"}
+          {isSignInForm ? "Sign In" : "Sign Up"}{" "}
+          {!isSignInForm && (
+            <p className="text-orange-400 text-[10px]">
+              Note* - You Can Use Fake Email ID, Make Sure Your Pass. Should
+              Contain 8 character with one Capital letter, Special char. &
+              Numbers
+            </p>
+          )}
         </h1>
         {!isSignInForm && (
           <input
@@ -133,20 +144,20 @@ const Login = () => {
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <div className="flex justify-between my-4">
+        {/* <div className="flex justify-between my-4">
           <span className="text-slate-400 ">
             <input className="mr-2 bg-slate-400" type="checkbox" />
             Remember me
           </span>
           <span className="text-slate-400">Need Help ? </span>
-        </div>
+        </div> */}
         <p
           className="text-slate-400 mt-2 cursor-pointer"
           onClick={toggelSignInForm}
         >
           {isSignInForm
-            ? "New to Netflix ? Sign Up Now."
-            : "Already Ragisterd.. Sign In Now."}
+            ? "New to Netflix ? 👉Sign Up Now."
+            : "Already Ragisterd.. 👉Sign In Now."}
         </p>
         <p className="text-slate-400 mt-1 mb-8">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.
